@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { RefreshCw } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 export default function LiveConversations() {
   const [conversations, setConversations] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchConversations = () => {
-    fetch('http://localhost:5000/api/conversations')
+    fetch(`${API_BASE_URL}/api/conversations`)
       .then(res => res.json())
       .then(data => {
         setConversations(data);

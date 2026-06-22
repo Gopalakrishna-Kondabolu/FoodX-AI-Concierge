@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../config';
 
 export default function Orders() {
   // Fetch a subset of orders based on the seeded demo customer phone, or just fetch all
@@ -11,7 +12,7 @@ export default function Orders() {
   const demoPhone = '+919876543210';
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/orders/customer/${encodeURIComponent(demoPhone)}`)
+    fetch(`${API_BASE_URL}/api/orders/customer/${encodeURIComponent(demoPhone)}`)
       .then(res => res.json())
       .then(data => {
         setOrders(data);

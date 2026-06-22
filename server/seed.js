@@ -144,15 +144,16 @@ const mockConversations = [
 async function seed() {
   try {
     await mongoose.connect(MONGODB_URI);
-    console.log('Connected to MongoDB.');
+    console.log('Connected to MongoDB. Database Name:', mongoose.connection.db.databaseName);
+    console.log('MenuItem Collection Name:', MenuItem.collection.collectionName);
 
     await MenuItem.deleteMany({});
     await Order.deleteMany({});
     await Conversation.deleteMany({});
     console.log('Cleared existing data.');
 
-    await MenuItem.insertMany(menuItems);
-    console.log('Seeded menu items.');
+    const insertedMenu = await MenuItem.insertMany(menuItems);
+    console.log(`Seeded ${insertedMenu.length} menu items.`);
 
     await Order.insertMany(mockOrders);
     console.log('Seeded orders.');

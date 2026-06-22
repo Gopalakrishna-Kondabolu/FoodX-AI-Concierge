@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Leaf, Drumstick } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 export default function MenuManagement() {
   const [menu, setMenu] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/menu')
+    fetch(`${API_BASE_URL}/api/menu`)
       .then(res => res.json())
       .then(data => {
         setMenu(data);
@@ -26,7 +27,7 @@ export default function MenuManagement() {
       item.id === id ? { ...item, available: newStatus } : item
     ));
 
-    fetch(`http://localhost:5000/api/menu/${id}`, {
+    fetch(`${API_BASE_URL}/api/menu/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ available: newStatus })

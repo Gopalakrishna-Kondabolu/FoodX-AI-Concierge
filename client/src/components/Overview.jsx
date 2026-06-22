@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { MessageCircle, AlertTriangle, Clock, CheckCircle2 } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 export default function Overview() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/conversations/stats')
+    fetch(`${API_BASE_URL}/api/conversations/stats`)
       .then(res => res.json())
       .then(data => {
         setStats(data);
