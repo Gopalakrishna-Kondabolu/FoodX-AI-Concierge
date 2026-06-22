@@ -18,6 +18,10 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
+  mongoose.connection.once('open', () => {
+  console.log('Connected to DB:', mongoose.connection.db.databaseName);
+});
+
 // --- Menu Routes ---
 
 // Get all menu items
