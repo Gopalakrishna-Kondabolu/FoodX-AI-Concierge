@@ -37,20 +37,19 @@ app.get('/privacy', (req, res) => {
 });
 
 
-app.get('/webhook', (req, res) => {
-  const mode = req.query['hub.mode'];
-  const token = req.query['hub.verify_token'];
-  const challenge = req.query['hub.challenge'];
-
-  if (mode === 'subscribe' && token === 'foodxtoken') {
-    res.status(200).send(challenge);
-  } else {
-    res.status(403).send('Forbidden');
+app.post('/webhook', async (req, res) => {
+  res.status(200).send('OK'); // Respond to Meta immediately
+  
+  // Forward to n8n
+  try {
+    await fetch('https://gopal36.app.n8n.cloud/webhook/a47e28b5-59c0-423f-bdf0-bee0f811b48c/webhook', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(req.body)
+    });
+  } catch (err) {
+    console.error('Failed to forward to n8n:', err);
   }
-});
-
-app.post('/webhook', (req, res) => {
-  res.status(200).send('OK');
 });
 
 // --- Menu Routes ---
