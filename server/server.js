@@ -38,11 +38,10 @@ app.get('/privacy', (req, res) => {
 
 
 app.post('/webhook', async (req, res) => {
-  res.status(200).send('OK'); // Respond to Meta immediately
+  res.status(200).send('OK');
   
-  // Forward to n8n
   try {
-    await fetch('https://gopal36.app.n8n.cloud/webhook/a47e28b5-59c0-423f-bdf0-bee0f811b48c/webhook', {
+    await fetch('https://gopal36.app.n8n.cloud/webhook/foodx-whatsapp', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(req.body)
@@ -51,7 +50,6 @@ app.post('/webhook', async (req, res) => {
     console.error('Failed to forward to n8n:', err);
   }
 });
-
 // --- Menu Routes ---
 
 // Get all menu items
