@@ -22,6 +22,20 @@ mongoose.connect(process.env.MONGODB_URI)
   console.log('Connected to DB:', mongoose.connection.db.databaseName);
 });
 
+// --- Static Routes ---
+app.get('/privacy', (req, res) => {
+  res.send(`
+    <html>
+      <body style="font-family: Arial; max-width: 800px; margin: 40px auto; padding: 20px;">
+        <h1>Privacy Policy — FoodX AI Concierge</h1>
+        <p>Last updated: June 2026</p>
+        <p>This application collects WhatsApp messages solely to provide automated customer support responses. No personal data is stored beyond what is necessary to process your request. Data is not shared with third parties.</p>
+        <p>Contact: gopal@foodxai.com</p>
+      </body>
+    </html>
+  `);
+});
+
 // --- Menu Routes ---
 
 // Get all menu items
