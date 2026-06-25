@@ -163,6 +163,24 @@ app.get('/api/conversations/stats', async (req, res) => {
   }
 });
 
+// Get conversations by customer phone
+app.get('/api/conversations/:phone', async (req, res) => {
+  try {
+    // Find the latest 5 messages for this specific phone number
+    const chats = await Conversation.find({ customerPhone: req.params.phone })
+                                    .sort({ timestamp: -1 }) // Get newest first
+                                    .limit(5); // Limit to 5 so we don't overload the AI memory
+
+    // Reverse the array so the AI reads them in chronological order (oldest to newest)
+    const recentChats = chats.reverse();
+
+    // Send it back in the exact format n8n is expecting
+    res.json({ recentChats });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
