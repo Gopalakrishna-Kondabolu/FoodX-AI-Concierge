@@ -9,7 +9,7 @@ export default function Orders() {
   
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const demoPhone = '+919876543210';
+  const demoPhone = '+919573633429';
 
   useEffect(() => {
     fetch(`${API_BASE_URL}/api/orders/customer/${encodeURIComponent(demoPhone)}`)
