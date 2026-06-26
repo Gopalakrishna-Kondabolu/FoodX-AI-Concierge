@@ -77,7 +77,7 @@ export default function LiveConversations() {
                   {getIntentBadge(conv.intent)}
                 </div>
                 <div className="text-xs text-slate-400 font-medium">
-                  {new Date(conv.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                  {conv.timestamp ? new Date(conv.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 'Just now'}
                 </div>
               </div>
               
