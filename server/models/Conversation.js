@@ -6,7 +6,7 @@ const conversationSchema = new mongoose.Schema({
   botReply: { type: String, required: true },
   intent: { 
     type: String, 
-    enum: ["menu_query", "order_status", "recommendation", "escalated", "other"],
+    enum: ["menu_query", "order_status", "recommendation", "escalated", "escalation", "greeting", "other"],
     default: "other"
   },
   timestamp: { type: Date, default: Date.now },
